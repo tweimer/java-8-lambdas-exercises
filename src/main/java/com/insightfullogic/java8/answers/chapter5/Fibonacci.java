@@ -2,6 +2,7 @@ package com.insightfullogic.java8.answers.chapter5;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class Fibonacci {
 
@@ -16,5 +17,10 @@ public class Fibonacci {
     public long fibonacci(int x) {
         return cache.computeIfAbsent(x, n -> fibonacci(n-1) + fibonacci(n-2));
     }
-
+    
+    public static void main(String[] args) {
+        Fibonacci fibonacci = new Fibonacci();
+        long fibonacci2 = fibonacci.fibonacci(12);
+        System.out.println(fibonacci2);
+    }
 }

@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.IntStream;
+import java.util.stream.LongStream;
 
 /**
  * Just run this class's main method and it will time benchmarks using the harness
@@ -29,7 +30,7 @@ public class OptimisationExample {
         Main.main(args);
     }
 
-    private List<Integer> linkedListOfNumbers;
+    private List<Long> linkedListOfNumbers;
 
     @Setup
     public void init() {
@@ -39,17 +40,17 @@ public class OptimisationExample {
         // TODO: put any additional setup code here
     }
 
-    private void addNumbers(List<Integer> container) {
-        IntStream.range(0, 1_000_000)
+    private void addNumbers(List<Long> container) {
+        LongStream.range(0, 1_000_000)
                  .forEach(container::add);
     }
 
     @GenerateMicroBenchmark
     // BEGIN slowSumOfSquares
-    public int slowSumOfSquares() {
+    public long slowSumOfSquares() {
         return linkedListOfNumbers.parallelStream()
                                   .map(x -> x * x)
-                                  .reduce(0, (acc, x) -> acc + x);
+                                  .reduce(0L, (acc, x) -> acc + x);
     }
     // END slowSumOfSquares
 
